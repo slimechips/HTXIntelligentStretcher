@@ -3,6 +3,7 @@ package com.htx.intelligentstretcher;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+//Test
 public class MainActivity extends AppCompatActivity {
 
     @Override
