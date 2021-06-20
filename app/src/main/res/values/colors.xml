@@ -3,4 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="pvgreen">#4DBA3B</color>
+    <color name="pvred">#DA2828</color>
+    <color name="cardButton">#6200EE</color>
 </resources>

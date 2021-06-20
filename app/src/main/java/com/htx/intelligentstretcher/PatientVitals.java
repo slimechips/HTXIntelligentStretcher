@@ -1,4 +1,6 @@
 package com.htx.intelligentstretcher;
 
-public class PatientVitals {
+import androidx.fragment.app.Fragment;
+
+public class PatientVitals extends Fragment {
 }
