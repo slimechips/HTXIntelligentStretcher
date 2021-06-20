@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/inventory_record_width"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/items_this_check_title_text_view"
+    android:background="@drawable/table_border"
+    android:orientation="horizontal"
+    android:layout_marginTop="1dp"
+    >
+    <TextView
+        android:id="@+id/item_id_text_view"
+        android:layout_width="@dimen/inventory_record_id_width"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/inventory_record_text_size"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="@dimen/inventory_record_item_margin"
+        android:text="@string/inventory_item_table_id_header"/>
+    <TextView
+        android:id="@+id/check_date_text_view"
+        android:layout_width="@dimen/inventory_record_check_date_width"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/inventory_record_text_size"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="@dimen/inventory_record_item_margin"
+        android:text="@string/inventory_item_table_check_date_header"/>
+    <TextView
+        android:id="@+id/expiry_date_text_view"
+        android:layout_width="@dimen/inventory_record_check_date_width"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/inventory_record_text_size"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="@dimen/inventory_record_item_margin"
+        android:text="@string/inventory_item_table_expiry_header"/>
+    <TextView
+        android:id="@+id/item_notes_text_view"
+        android:layout_width="@dimen/inventory_record_check_date_width"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/inventory_record_text_size"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="@dimen/inventory_record_item_margin"
+        android:text="@string/inventory_item_table_notes_header"/>
+</LinearLayout>

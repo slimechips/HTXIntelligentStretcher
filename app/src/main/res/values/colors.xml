@@ -2,5 +2,12 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#B39DDB</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="background">#CCCCCC</color>
+
+    <color name="inventory_item_color_bad">#F48FB1</color>
+    <color name="inventory_item_color_good">#7DE481</color>
+
 </resources>

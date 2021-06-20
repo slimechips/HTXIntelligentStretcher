@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="inventory_navbar_width">200dp</dimen>
+    <dimen name="inventory_sub_navbar_width">200dp</dimen>
+
+    <dimen name="inventory_item_card_height">400dp</dimen>
+    <dimen name="inventory_item_card_width">264dp</dimen>
+    <dimen name="inventory_item_card_margin">10dp</dimen>
+
+    <dimen name="inventory_record_width">620dp</dimen>
+    <dimen name="inventory_record_item_margin">4dp</dimen>
+    <dimen name="inventory_record_id_width">60dp</dimen>
+    <dimen name="inventory_record_check_date_width">160dp</dimen>
+    <dimen name="inventory_record_notes_width">300dp</dimen>
+    <dimen name="inventory_record_text_size">12sp</dimen>
+</resources>
