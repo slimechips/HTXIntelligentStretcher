@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DashboardFragment">
+
+    <TextView
+        android:id="@+id/dashboardTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="20dp"
+        android:text="DASHBOARD"
+        android:textAllCaps="true"
+        android:textSize="32sp"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/patientVitals"
+        android:layout_width="1200dp"
+        android:layout_height="250dp"
+        android:layout_below="@id/dashboardTitle"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
+        app:cardElevation="5dp"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/pvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Patient Vital Signs"
+                android:textAllCaps="true"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/pvSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pvTitle"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Heart rate, SPO2, Temperature, Blood pressure"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/hrData"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pvSubtitle"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="98bpm"
+                android:textSize="64sp"
+                android:textColor="@color/pvgreen"/>
+
+            <TextView
+                android:id="@+id/hrTitle"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hrData"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="5dp"
+                android:text="HEART RATE"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/spo2Data"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pvSubtitle"
+                android:layout_toRightOf="@id/hrData"
+                android:layout_marginHorizontal="80dp"
+                android:layout_marginTop="20dp"
+                android:text="100%"
+                android:textSize="64sp"
+                android:textColor="@color/pvgreen"/>
+
+            <TextView
+                android:id="@+id/spo2Title"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spo2Data"
+                android:layout_toRightOf="@+id/hrTitle"
+                android:layout_marginHorizontal="80dp"
+                android:layout_marginTop="5dp"
+                android:text="SPO2"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tempData"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pvSubtitle"
+                android:layout_toRightOf="@id/spo2Data"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginTop="20dp"
+                android:text="38.5C"
+                android:textSize="64sp"
+                android:textColor="@color/pvred"/>
+
+            <TextView
+                android:id="@+id/tempTitle"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tempData"
+                android:layout_toRightOf="@+id/spo2Title"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginTop="5dp"
+                android:text="TEMP"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/bpData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pvSubtitle"
+                android:layout_toRightOf="@id/tempData"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="20dp"
+                android:text="118/78"
+                android:textSize="64sp"
+                android:textColor="@color/pvgreen"/>
+
+            <TextView
+                android:id="@+id/bpTitle"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tempData"
+                android:layout_toRightOf="@+id/tempTitle"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="5dp"
+                android:text="SYS/DIA"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:text="VIEW"
+                android:textSize="14dp"
+                android:textColor="@color/cardButton"/>
+
+        </RelativeLayout>
+            
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/oxygenTank"
+        android:layout_width="370dp"
+        android:layout_height="350dp"
+        android:layout_below="@id/patientVitals"
+        android:layout_marginHorizontal="40dp"
+        app:cardElevation="5dp"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/otTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Oxygen tank"
+                android:textAllCaps="true"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/otSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/otTitle"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Capacity"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/otData"
+                android:layout_width="172dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/otSubtitle"
+                android:layout_marginHorizontal="99dp"
+                android:layout_marginVertical="60dp"
+                android:text="62.5%"
+                android:textColor="@color/pvgreen"
+                android:textSize="64sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:text="VIEW"
+                android:textSize="14dp"
+                android:textColor="@color/cardButton"/>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/itemTracking"
+        android:layout_width="370dp"
+        android:layout_height="350dp"
+        android:layout_below="@id/patientVitals"
+        android:layout_toRightOf="@id/oxygenTank"
+        android:layout_marginHorizontal="40dp"
+        app:cardElevation="5dp"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/itTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Inventory Management"
+                android:textAllCaps="true"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/itSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/itTitle"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Expiring and Low Quantity Items"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:text="VIEW"
+                android:textSize="14dp"
+                android:textColor="@color/cardButton"/>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/dosageCheatsheet"
+        android:layout_width="370dp"
+        android:layout_height="350dp"
+        android:layout_below="@id/patientVitals"
+        android:layout_toRightOf="@id/itemTracking"
+        android:layout_marginHorizontal="40dp"
+        app:cardElevation="5dp"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/dcTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Dosage Sheet"
+                android:textAllCaps="true"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dcSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dcTitle"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Frequently Used Drugs "
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:text="VIEW"
+                android:textSize="14dp"
+                android:textColor="@color/cardButton"/>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>
