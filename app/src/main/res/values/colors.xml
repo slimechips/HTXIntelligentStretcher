@@ -12,5 +12,10 @@
 
     <color name="inventory_item_color_bad">#F48FB1</color>
     <color name="inventory_item_color_good">#7DE481</color>
+    <color name="textColorPrimary">#442C2E</color>
+    <color name="toolbarIconColor">@color/textColorPrimary</color>
+    <color name="loginPageBackgroundColor">#FFFFFF</color>
+    <color name="productGridBackgroundColor">#FFFBFA</color>
+    <color name="textInputOutlineColor">#FBB8AC</color>
 
 </resources>

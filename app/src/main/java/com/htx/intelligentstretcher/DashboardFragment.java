@@ -18,13 +18,20 @@ import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
 public class DashboardFragment extends Fragment {
 
     private MaterialCardView invButton;
+    private MaterialCardView oxygenButton;
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.dashboard_fragment, container, false);
+        oxygenButton = view.findViewById(R.id.oxygenTank);
         MaterialCardView pvButton = view.findViewById(R.id.patientVitals);
         invButton = view.findViewById(R.id.itemTracking);
+
+        oxygenButton.setOnClickListener(v -> {
+            ((NavigationHost) getActivity()).navigateTo(new OxygenTankFragment(), true); // Navigate to the next Fragment
+        });
 
         pvButton.setOnClickListener(view12 -> {
             ((NavigationHost) getActivity()).navigateTo(new PatientVitals(), true); // Navigate to the next Fragment
