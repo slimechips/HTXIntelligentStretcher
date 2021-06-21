@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Medical Bag -->
+    <array name="medical_bag_opts">
+        <item>@array/medical_bag_main_compartment</item>
+        <item>@array/medical_bag_front_compartment</item>
+    </array>
+
+
+
+
+    <array name="medical_bag_main_compartment">
+        <item>@string/inventory_nested</item>
+        <item>@string/medical_bag_main_compartment_title</item>
+        <item>@array/medical_bag_main_compartment_left_pocket</item>
+        <item>@array/medical_bag_main_compartment_right_pocket</item>
+    </array>
+    <string name="medical_bag_main_compartment_title">Main Compartment</string>
+
+    <array name="medical_bag_main_compartment_left_pocket">
+        <item>@string/medical_bag_main_compartment_left_pocket_name</item>
+        <item>@array/medical_bag_main_compartment_left_pocket_items</item>
+    </array>
+    <string name="medical_bag_main_compartment_left_pocket_name">Left Pocket</string>
+    <array name="medical_bag_main_compartment_left_pocket_items">
+        <item>@array/item_chlorohexadine</item>
+        <item>@array/item_plaster</item>
+    </array>
+    <array name="item_chlorohexadine">
+        <item><string>Chlorohexadine</string></item>
+        <item><string>Single Sealed Bag</string></item>
+        <item><integer>3</integer></item>
+        <item>@drawable/chlorohexadine</item>
+        <item><string>Ensure not expired, air tight</string></item>
+        <item>@array/item_cholorohexadine_instances</item>
+        <item>@array/item_cholorohexadine_records</item>
+    </array>
+    <array name="item_plaster">
+        <item><string>Plaster</string></item>
+        <item><string>10 Pack</string></item>
+        <item><integer>4</integer></item>
+        <item>@drawable/plaster</item>
+        <item><string>Ensure not expired, seal intact</string></item>
+        <item>@array/item_plaster_instances</item>
+        <item>@array/item_plaster_records</item>
+    </array>
+
+    <array name="medical_bag_main_compartment_right_pocket">
+        <item>@string/medical_bag_main_compartment_right_pocket_title</item>
+        <item>@array/medical_bag_main_compartment_right_pocket_items</item>
+    </array>
+    <string name="medical_bag_main_compartment_right_pocket_title">Right Pocket</string>
+    <array name="medical_bag_main_compartment_right_pocket_items">
+        <item>@array/item_plaster</item>
+    </array>
+
+
+
+
+    <array name="medical_bag_front_compartment">
+        <item>@string/inventory_not_nested</item>
+        <item>@string/medical_bag_front_compartment_title</item>
+        <item>@array/medical_bag_front_compartment_items</item>
+    </array>
+    <string name="medical_bag_front_compartment_title">Front Compartment</string>
+    <array name="medical_bag_front_compartment_items">
+    </array>
+
+
+
+    <!-- SAMPLE DATA -->
+
+
+
+
+
+    <array name="item_cholorohexadine_instances">
+        <item>@array/chlorohexadine_instance_1</item>
+        <item>@array/chlorohexadine_instance_2</item>
+    </array>
+    <array name="chlorohexadine_instance_1">
+        <item><integer>1000000</integer></item> <!-- InstanceId -->
+        <item><string>29/09/2021</string></item> <!-- Expiry Date-->
+    </array>
+    <array name="chlorohexadine_instance_2">
+        <item><integer>1000001</integer></item> <!-- InstanceId -->
+        <item><string>30/09/2021</string></item> <!-- Expiry Date-->
+    </array>
+
+    <array name="item_cholorohexadine_records">
+        <item>@array/item_chlorohexadine_record_1</item>
+        <item>@array/item_chlorohexadine_record_2</item>
+        <item>@array/item_chlorohexadine_record_3</item>
+    </array>
+    <array name="item_chlorohexadine_record_1">
+        <item><integer>1000000</integer></item> <!-- ItemInstanceId -->
+        <item><integer>2</integer></item> <!-- CheckId -->
+        <item><string>25/06/2021 12:01:01</string></item> <!-- Check Date and Time -->
+        <item><string>25/06/2021 12:01:01 - Packaging seal replaced</string></item>
+    </array>
+    <array name="item_chlorohexadine_record_2">
+        <item><integer>1000001</integer></item> <!-- ItemInstanceId -->
+        <item><integer>2</integer></item> <!-- CheckId -->
+        <item><string>25/06/2021 12:01:01</string></item> <!-- Check Date and Time -->
+        <item><string></string></item>
+    </array>
+    <array name="item_chlorohexadine_record_3">
+        <item><integer>1000000</integer></item> <!-- ItemInstanceId -->
+        <item><integer>1</integer></item> <!-- CheckId -->
+        <item><string>26/06/2021 11:42:01</string></item> <!-- Check Date and Time -->
+        <item><string></string></item>
+    </array>
+
+    <array name="item_plaster_instances">
+        <item>@array/plaster_instance_1</item>
+        <item>@array/plaster_instance_2</item>
+    </array>
+    <array name="plaster_instance_1">
+        <item><integer>1000003</integer></item> <!-- InstanceId -->
+        <item><string>29/09/2021</string></item> <!-- Expiry Date-->
+    </array>
+    <array name="plaster_instance_2">
+        <item><integer>1000004</integer></item> <!-- InstanceId -->
+        <item><string>30/09/2021</string></item> <!-- Expiry Date-->
+    </array>
+
+    <array name="item_plaster_records">
+        <item>@array/item_plaster_record_1</item>
+        <item>@array/item_plaster_record_2</item>
+        <item>@array/item_plaster_record_3</item>
+    </array>
+    <array name="item_plaster_record_1">
+        <item><integer>1000003</integer></item> <!-- ItemInstanceId -->
+        <item><integer>2</integer></item> <!-- CheckId -->
+        <item><string>25/06/2021 8:01:01</string></item> <!-- Check Date and Time -->
+        <item><string>25/06/2021 12:01:01 - Plaster replaced</string></item>
+    </array>
+    <array name="item_plaster_record_2">
+        <item><integer>1000004</integer></item> <!-- ItemInstanceId -->
+        <item><integer>2</integer></item> <!-- CheckId -->
+        <item><string>25/06/2021 8:01:01</string></item> <!-- Check Date and Time -->
+        <item><string></string></item>
+    </array>
+    <array name="item_plaster_record_3">
+        <item><integer>1000003</integer></item> <!-- ItemInstanceId -->
+        <item><integer>1</integer></item> <!-- CheckId -->
+        <item><string>26/06/2021 8:42:01</string></item> <!-- Check Date and Time -->
+        <item><string></string></item>
+    </array>
+</resources>

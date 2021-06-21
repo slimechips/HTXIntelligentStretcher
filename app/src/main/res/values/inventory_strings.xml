@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nav Drawer -->
+    <string name="medical_bag">Medical Bag</string>
+    <string name="bandage_drawer">Bandage Drawer</string>
+    <string name="iv_drawer">IV Drawer</string>
+    <string name="support_drawer">Support Drawer</string>
+    <string name="drugs_drawer">Drugs Drawer</string>
+    <string name="prev_checks">Previous Checks</string>
+
+    <string name="inventory_nested">true</string>
+    <string name="inventory_not_nested">false</string>
+
+    <string name="inventory_search_bar_hint">Search item...</string>
+    <string name="inventory_item_content_desc">Inventory Item</string>
+    <string name="inventory_item_calendar_icon_content_desc">Calendar Icon</string>
+    <string name="inventory_item_count_default">0/0</string>
+    <string name="inventory_item_title_default">Item Title</string>
+    <string name="inventory_item_subtitle_default">Item Subtitle</string>
+    <string name="inventory_item_desc_default">Item Description</string>
+    <string name="inventory_item_expiry_default">15/6/2021</string>
+
+    <string name="inventory_item_table_id_header">ID</string>
+    <string name="inventory_item_table_check_date_header">Checked</string>
+    <string name="inventory_item_table_expiry_header">Expiry</string>
+    <string name="inventory_item_table_notes_header">Notes</string>
+
+
+    <string name="inventory_item_this_check_default">Items Scanned for this Check</string>
+    <string name="inventory_item_history_title">History</string>
+
+    <!-- Check Data -->
+
+    <array name="inventory_checks">
+        <item>@array/check_1</item>
+        <item>@array/check_2</item>
+    </array>
+    <array name="check_1">
+        <item><integer>1</integer></item> <!-- Check ID -->
+        <item><string>Alfred</string></item> <!-- Name -->
+        <item><string>24/05/2021 10:00:00</string></item> <!-- Check Time -->
+    </array>
+    <array name="check_2">
+        <item><integer>2</integer></item> <!-- Check ID -->
+        <item><string>Roy</string></item> <!-- Name -->
+        <item><string>25/05/2021 10:00:00</string></item> <!-- Check Time -->
+    </array>
+</resources>

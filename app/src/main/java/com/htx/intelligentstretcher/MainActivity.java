@@ -1,10 +1,17 @@
 package com.htx.intelligentstretcher;
 
+import android.content.Intent;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import androidx.fragment.app.FragmentContainerView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
+import com.htx.intelligentstretcher.inventory.db.InventoryDatabase;
 
 //Test
 public class MainActivity extends AppCompatActivity implements NavigationHost {
@@ -13,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        InventoryDatabase.buildDatabase(getApplicationContext());
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
