@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".dosage.DrugFragment"
+    android:orientation="horizontal">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/loginPageBackgroundColor"
+        app:cardElevation="10dp"
+        tools:ignore="MissingConstraints">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/drug_photo"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                />
+
+            <TextView
+                android:id="@+id/drug_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_toRightOf="@+id/drug_photo"
+                android:layout_alignParentTop="true"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/drug_info"
+                android:textSize="20dp"
+                android:layout_toRightOf="@+id/drug_photo"
+                android:layout_below="@+id/drug_name"
+                />
+
+            <!--            <Button-->
+            <!--                android:id="@+id/drug1_info"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_toRightOf="@+id/drug1_photo"-->
+            <!--                android:layout_below="@+id/drug1_name"-->
+            <!--                android:text="- 6mg/2mL(Adult with weight > 50Kg)\n- 0.05 to 0.1mg/Kg(Pediatric with weight < 50Kg)"-->
+            <!--                style="@style/Widget.MaterialComponents.Button.TextButton"-->
+            <!--                />-->
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

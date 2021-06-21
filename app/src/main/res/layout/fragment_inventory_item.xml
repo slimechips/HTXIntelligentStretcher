@@ -13,7 +13,7 @@
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:id="@+id/inventory_item_relative_layout"
-                android:layout_width="@dimen/inventory_item_card_width"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/inventory_item_card_height"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
@@ -58,10 +58,9 @@
                 <ImageView
                     android:id="@+id/inventory_item_image_view"
                     android:contentDescription="@string/inventory_item_content_desc"
-                    android:layout_width="match_parent"
+                    android:layout_width="240dp"
                     android:layout_height="240dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_below="@id/inventory_item_subtitle_text_view"
                     android:scaleType="centerCrop"
                     android:src="@drawable/chlorohexadine"/>
@@ -72,6 +71,8 @@
                     android:layout_below="@id/inventory_item_image_view"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginVertical="8dp"
+                    android:layout_marginLeft="8dp"
                     android:textSize="12sp"
                     android:text="@string/inventory_item_desc_default"/>
                 <ImageView

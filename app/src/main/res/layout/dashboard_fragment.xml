@@ -353,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
-                android:text="Dosage Sheet"
+                android:text="Stretcher Control"
                 android:textAllCaps="true"
                 android:textSize="@dimen/dashboard_title_text_size"
                 android:textStyle="bold" />
@@ -365,7 +365,7 @@
                 android:layout_below="@id/scTitle"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
-                android:text="Frequently Used Drugs "
+                android:text="Height Adjustment, Cot-to-chair, Power Assist"
                 android:textSize="14sp" />
 
             <TextView

@@ -18,4 +18,6 @@
     <color name="productGridBackgroundColor">#FFFBFA</color>
     <color name="textInputOutlineColor">#FBB8AC</color>
 
+    <color name="button_press_colour">#FF2121</color>
+
 </resources>

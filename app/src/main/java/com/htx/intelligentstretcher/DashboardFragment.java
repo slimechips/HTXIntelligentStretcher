@@ -13,12 +13,16 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.htx.intelligentstretcher.control.StretcherControlFragment;
+import com.htx.intelligentstretcher.dosage.DrugFragment;
 import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
 
 public class DashboardFragment extends Fragment {
 
     private MaterialCardView invButton;
     private MaterialCardView oxygenButton;
+    private MaterialCardView dosageButton;
+    private MaterialCardView controlButton;
 
     @Override
     public View onCreateView(
@@ -28,6 +32,8 @@ public class DashboardFragment extends Fragment {
         oxygenButton = view.findViewById(R.id.oxygenTank);
         MaterialCardView pvButton = view.findViewById(R.id.patientVitals);
         invButton = view.findViewById(R.id.itemTracking);
+        dosageButton = view.findViewById(R.id.dosageCheatsheet);
+        controlButton = view.findViewById(R.id.stretcherControl);
 
         oxygenButton.setOnClickListener(v -> {
             ((NavigationHost) getActivity()).navigateTo(new OxygenTankFragment(), true); // Navigate to the next Fragment
@@ -39,6 +45,14 @@ public class DashboardFragment extends Fragment {
 
         invButton.setOnClickListener(view1 -> {
             ((NavigationHost) getActivity()).navigateTo(new InventoryMainFragment(), true); // Navigate to the next Fragment
+        });
+
+        dosageButton.setOnClickListener(v -> {
+            ((NavigationHost) getActivity()).navigateTo(new DrugFragment(), true); // Navigate to the next Fragment
+        });
+
+        controlButton.setOnClickListener(v -> {
+            ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true); // Navigate to the next Fragment
         });
 
         return view;
