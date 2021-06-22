@@ -30,7 +30,7 @@
     <array name="item_chlorohexadine">
         <item><string>Chlorohexadine</string></item>
         <item><string>Single Sealed Bag</string></item>
-        <item><integer>3</integer></item>
+        <item><integer>4</integer></item>
         <item>@drawable/chlorohexadine</item>
         <item><string>Ensure not expired, air tight</string></item>
         <item>@array/item_cholorohexadine_instances</item>
@@ -39,7 +39,7 @@
     <array name="item_plaster">
         <item><string>Plaster</string></item>
         <item><string>10 Pack</string></item>
-        <item><integer>4</integer></item>
+        <item><integer>3</integer></item>
         <item>@drawable/plaster</item>
         <item><string>Ensure not expired, seal intact</string></item>
         <item>@array/item_plaster_instances</item>
@@ -52,9 +52,17 @@
     </array>
     <string name="medical_bag_main_compartment_right_pocket_title">Right Pocket</string>
     <array name="medical_bag_main_compartment_right_pocket_items">
-        <item>@array/item_plaster</item>
+        <item>@array/item_panadol</item>
     </array>
-
+    <array name="item_panadol">
+        <item><string>Panadol</string></item>
+        <item><string>10 Pack</string></item>
+        <item><integer>2</integer></item>
+        <item>@drawable/panadol</item>
+        <item><string>Ensure not expired</string></item>
+        <item>@array/item_panadol_instances</item>
+        <item>@array/item_panadol_records</item>
+    </array>
 
 
 
@@ -147,5 +155,13 @@
         <item><integer>1</integer></item> <!-- CheckId -->
         <item><string>26/06/2021 8:42:01</string></item> <!-- Check Date and Time -->
         <item><string></string></item>
+    </array>
+
+    <array name="item_panadol_instances">
+
+    </array>
+
+    <array name="item_panadol_records">
+
     </array>
 </resources>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -17,12 +18,16 @@ import com.htx.intelligentstretcher.control.StretcherControlFragment;
 import com.htx.intelligentstretcher.dosage.DrugFragment;
 import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
 
+import java.text.DecimalFormat;
+
 public class DashboardFragment extends Fragment {
 
     private MaterialCardView invButton;
     private MaterialCardView oxygenButton;
     private MaterialCardView dosageButton;
     private MaterialCardView controlButton;
+    private static String oxygenText;
+    private TextView otTextView;
 
     @Override
     public View onCreateView(
@@ -34,6 +39,7 @@ public class DashboardFragment extends Fragment {
         invButton = view.findViewById(R.id.itemTracking);
         dosageButton = view.findViewById(R.id.dosageCheatsheet);
         controlButton = view.findViewById(R.id.stretcherControl);
+        otTextView = view.findViewById(R.id.otData);
 
         oxygenButton.setOnClickListener(v -> {
             ((NavigationHost) getActivity()).navigateTo(new OxygenTankFragment(), true); // Navigate to the next Fragment
@@ -58,5 +64,9 @@ public class DashboardFragment extends Fragment {
         return view;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        otTextView.setText("" + OxygenTankFragment.oxygenStr + "SLPM");
+    }
 }

@@ -13,12 +13,19 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.slider.Slider;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 public class OxygenTankFragment extends Fragment {
     private Slider slider;
     private CardView card;
     private TextView accumulatedText;
     private TextView remainingText;
     private TextView Instant_flow_rate;
+    private static final DecimalFormat OXYGEN_LEVEL = new java.text.DecimalFormat("0.0");
+    public static String oxygenStr = "0";
 
     @Nullable
     @Override
@@ -55,12 +62,13 @@ public class OxygenTankFragment extends Fragment {
             @Override
             public void onValueChange(Slider slider, float value, boolean fromUser) {
                 //Use the value
-                java.text.DecimalFormat myformat=new java.text.DecimalFormat("0.0");
-                String str = myformat.format(value);
-                Instant_flow_rate.setText("" + str + "SLPM");
+                oxygenStr  = OXYGEN_LEVEL.format(value);
+                Instant_flow_rate.setText("" + oxygenStr + "SLPM");
             }
         });
 
         return v;
     }
+
+
 }

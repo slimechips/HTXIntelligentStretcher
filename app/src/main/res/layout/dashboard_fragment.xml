@@ -198,7 +198,7 @@
                 android:layout_below="@id/otTitle"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
-                android:text="Capacity"
+                android:text="Flow Rate"
                 android:textSize="14sp" />
 
             <TextView
@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center_horizontal"
-                android:text="62.5%"
+                android:text="0 SLPM"
                 android:textColor="@color/pvgreen"
                 android:textSize="@dimen/dashboard_text_size" />
 
