@@ -26,12 +26,12 @@ public class DrugFragment extends Fragment {
         recyclerView = v.findViewById(R.id.rv);
 
         List<Drug> drugList = new ArrayList<>();
-        Drug drug1 = new Drug(R.drawable.ic_launcher_background,"Adenosine","- 6mg/2mL(Adult with weight > 50Kg)\n- 0.05 to 0.1mg/Kg(Pediatric with weight < 50Kg)");
-        Drug drug2 = new Drug(R.drawable.ic_launcher_background,"Amiodarone"," 15mg/min");
-        Drug drug3 = new Drug(R.drawable.ic_launcher_background,"GTN"," 5mg/mL");
-        Drug drug4 = new Drug(R.drawable.ic_launcher_background,"Normal Saline 0.9%"," 15mg/min");
-        Drug drug5 = new Drug(R.drawable.ic_launcher_background,"Tramadol"," 0.15mg/Kg");
-        Drug drug6 = new Drug(R.drawable.ic_launcher_background,"Ventolin Salbutamol"," 2.5mg/3mL");
+        Drug drug1 = new Drug(R.drawable.adenosine,"Adenosine","- 6mg/2mL(Adult with weight > 50Kg)\n- 0.05 to 0.1mg/Kg(Pediatric with weight < 50Kg)");
+        Drug drug2 = new Drug(R.drawable.amiodarone,"Amiodarone"," 15mg/min");
+        Drug drug3 = new Drug(R.drawable.gtn,"GTN"," 5mg/mL");
+        Drug drug4 = new Drug(R.drawable.normalsaline,"Normal Saline 0.9%"," 15mg/min");
+        Drug drug5 = new Drug(R.drawable.tramadol,"Tramadol"," 0.15mg/Kg");
+        Drug drug6 = new Drug(R.drawable.vs,"Ventolin Salbutamol"," 2.5mg/3mL");
         drugList.add(drug1);
         drugList.add(drug2);
         drugList.add(drug3);
