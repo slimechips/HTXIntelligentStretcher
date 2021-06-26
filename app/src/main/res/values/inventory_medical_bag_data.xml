@@ -104,19 +104,19 @@
     <array name="item_chlorohexadine_record_1">
         <item><integer>1000000</integer></item> <!-- ItemInstanceId -->
         <item><integer>2</integer></item> <!-- CheckId -->
-        <item><string>25/06/2021 12:01:01</string></item> <!-- Check Date and Time -->
-        <item><string>25/06/2021 12:01:01 - Packaging seal replaced</string></item>
+        <item><string>25/05/2021 12:01:01</string></item> <!-- Check Date and Time -->
+        <item><string>25/05/2021 12:01:01 - Packaging seal replaced</string></item>
     </array>
     <array name="item_chlorohexadine_record_2">
         <item><integer>1000001</integer></item> <!-- ItemInstanceId -->
         <item><integer>2</integer></item> <!-- CheckId -->
-        <item><string>25/06/2021 12:01:01</string></item> <!-- Check Date and Time -->
+        <item><string>25/05/2021 12:01:01</string></item> <!-- Check Date and Time -->
         <item><string></string></item>
     </array>
     <array name="item_chlorohexadine_record_3">
         <item><integer>1000000</integer></item> <!-- ItemInstanceId -->
         <item><integer>1</integer></item> <!-- CheckId -->
-        <item><string>26/06/2021 11:42:01</string></item> <!-- Check Date and Time -->
+        <item><string>26/05/2021 11:42:01</string></item> <!-- Check Date and Time -->
         <item><string></string></item>
     </array>
 
@@ -141,19 +141,19 @@
     <array name="item_plaster_record_1">
         <item><integer>1000003</integer></item> <!-- ItemInstanceId -->
         <item><integer>2</integer></item> <!-- CheckId -->
-        <item><string>25/06/2021 8:01:01</string></item> <!-- Check Date and Time -->
-        <item><string>25/06/2021 12:01:01 - Plaster replaced</string></item>
+        <item><string>25/05/2021 8:01:01</string></item> <!-- Check Date and Time -->
+        <item><string>25/05/2021 12:01:01 - Plaster replaced</string></item>
     </array>
     <array name="item_plaster_record_2">
         <item><integer>1000004</integer></item> <!-- ItemInstanceId -->
         <item><integer>2</integer></item> <!-- CheckId -->
-        <item><string>25/06/2021 8:01:01</string></item> <!-- Check Date and Time -->
+        <item><string>25/05/2021 8:01:01</string></item> <!-- Check Date and Time -->
         <item><string></string></item>
     </array>
     <array name="item_plaster_record_3">
         <item><integer>1000003</integer></item> <!-- ItemInstanceId -->
         <item><integer>1</integer></item> <!-- CheckId -->
-        <item><string>26/06/2021 8:42:01</string></item> <!-- Check Date and Time -->
+        <item><string>26/05/2021 8:42:01</string></item> <!-- Check Date and Time -->
         <item><string></string></item>
     </array>
 
