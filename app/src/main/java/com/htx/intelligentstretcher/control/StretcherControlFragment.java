@@ -21,8 +21,8 @@ public class StretcherControlFragment extends Fragment {
     private ImageButton chairButton;
     private ImageButton powerAssButton;
 
-    private boolean cotSelected = false;
-    private boolean powerAssOn = false;
+    static public boolean cotSelected = false;
+    static public boolean powerAssOn = false;
 
     @Nullable
     @Override
@@ -48,8 +48,14 @@ public class StretcherControlFragment extends Fragment {
             }
         });
         cotButton.callOnClick();
-
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        togglePower();
+        changeToCot();
     }
 
     private synchronized void toggleCot() {
@@ -66,5 +72,22 @@ public class StretcherControlFragment extends Fragment {
             chairButton.setAlpha(1.0f);
         }
         cotSelected = false;
+    }
+
+    public void changeToCot() {
+        if (cotSelected) {
+            cotButton.setAlpha(1.0f);
+            chairButton.setAlpha(0.2f);
+        } else {
+            cotButton.setAlpha(0.2f);
+            chairButton.setAlpha(1.0f);
+        }
+    }
+
+    public void togglePower() {
+        if (powerAssOn) {
+            powerAssButton.setImageResource(R.drawable.power_button_red);
+            powerAssButton.setAlpha(1.0f);
+        }
     }
 }
