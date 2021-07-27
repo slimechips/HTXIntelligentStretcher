@@ -19,6 +19,25 @@
         android:textSize="24sp"
         android:textStyle="bold"/>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/button"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:hint="Tap to Speak"
+        android:id="@+id/text"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/dashboardTitle"
+        android:backgroundTint="#F9F8FA"
+        android:layout_margin="14dp"
+        android:src="@drawable/ic_mic_black_off"
+        android:id="@+id/button"/>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/patientVitals"
         android:layout_width="match_parent"
@@ -156,6 +175,17 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:text="VIEW"
+                android:textSize="14dp"
+                android:textColor="@color/cardButton"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:text="Last update time:"
                 android:textSize="14dp"
                 android:textColor="@color/cardButton"/>
 
