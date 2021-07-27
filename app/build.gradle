@@ -26,6 +26,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://repo.eclipse.org/content/repositories/paho-releases/"
+    }
+}
+
 dependencies {
     api 'com.google.android.material:material:1.1.0-alpha06'
     def fragment_version = "1.3.4"
@@ -51,4 +57,11 @@ dependencies {
 
     //pass the event
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    compile('org.eclipse.paho:org.eclipse.paho.android.service:1.0.2') {
+        exclude module: 'support-v4'
+    }
 }

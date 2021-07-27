@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,6 +18,17 @@ import com.htx.intelligentstretcher.R;
 import com.htx.intelligentstretcher.utils.CotToChairJSON;
 import com.htx.intelligentstretcher.utils.HeightControlJSON;
 import com.htx.intelligentstretcher.utils.PowerAssControlJSON;
+
+//import static com.htx.intelligentstretcher.MainActivity.client;
+
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
+import javax.security.auth.login.LoginException;
 
 public class StretcherControlFragment extends Fragment {
 
@@ -32,6 +45,8 @@ public class StretcherControlFragment extends Fragment {
     private CotToChairJSON cotToChairCommands = new CotToChairJSON();
     private Gson gson = new Gson();
     private String json;
+
+
 
     @Nullable
     @Override
@@ -69,12 +84,14 @@ public class StretcherControlFragment extends Fragment {
                         heightCommands.setHeightCommand("up");
                         json = gson.toJson(heightCommands);
                         Log.i("height", json);
+                        //pub(json, "Height");
                         return false;
 
                     case MotionEvent.ACTION_UP:
                         heightCommands.setHeightCommand("stop");
                         json = gson.toJson(heightCommands);
                         Log.i("height", json);
+                        //pub(json, "Height");
                         return false;
                 }
                 return false;
@@ -100,8 +117,11 @@ public class StretcherControlFragment extends Fragment {
                 return false;
             }
         });
+
         return v;
     }
+
+
 
     @Override
     public void onResume() {
@@ -148,4 +168,18 @@ public class StretcherControlFragment extends Fragment {
             powerAssButton.setAlpha(1.0f);
         }
     }
+
+//    public void pub(String msg, String topicStr){
+//        String topic = topicStr;
+//        String message = msg;
+//        Log.i("test", "pub: ");
+//        try {
+//            client.publish(topic, message.getBytes(),0,false);
+//
+//        } catch (MqttException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
 }
