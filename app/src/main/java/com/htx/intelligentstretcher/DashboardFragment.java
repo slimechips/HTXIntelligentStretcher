@@ -38,9 +38,12 @@ import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.htx.intelligentstretcher.MainActivity.speechRecognizer;
+import static com.htx.intelligentstretcher.MainActivity.speechRecognizerIntent;
 import static java.util.Calendar.getInstance;
 
 import android.speech.tts.TextToSpeech;
@@ -54,7 +57,6 @@ public class DashboardFragment extends Fragment {
     private static String oxygenText;
     private TextView otTextView;
     public static final Integer RecordAudioRequestCode = 1;
-    private SpeechRecognizer speechRecognizer;
     private EditText speechText;
     private ImageView micButton;
     Handler handler = new Handler();
@@ -66,6 +68,17 @@ public class DashboardFragment extends Fragment {
     TextToSpeech t1;
     int bloodPressure = 210;
     int oxygenTank = 150;
+
+//    SpeechRecognizer speechRecognizer = MainActivity.speechRecognizer;
+//    Intent speechRecognizerIntent = MainActivity.speechRecognizerIntent;
+
+    //Speech to text check words
+    String[] powerAssWords = {"power", "assist", "on"};
+    String[] cotToChairWords = {"change", "chair"};
+    String[] chairToCotWords = {"change", "bed"};
+    String[] bloodPressureWords = {"blood", "pressure"};
+    String[] oxygenTankWords = {"oxygen", "tank"};
+
 
     @Override
     public View onCreateView(
@@ -100,8 +113,6 @@ public class DashboardFragment extends Fragment {
             ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true); // Navigate to the next Fragment
         });
 
-        checkPermission();
-
         t1=new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -112,12 +123,6 @@ public class DashboardFragment extends Fragment {
         });
 
         speechText = view.findViewById(R.id.text);
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
-
-        final Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override
             public void onReadyForSpeech(Bundle bundle) {
@@ -158,21 +163,21 @@ public class DashboardFragment extends Fragment {
                 t1.speak(data.get(0), TextToSpeech.QUEUE_FLUSH, null, "Test");
                 if (data.get(0).equals("stretcher")) {
                     ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true);
-                } else if (data.get(0).equals("oxygen")) {
+                } else if (Arrays.stream(oxygenTankWords).allMatch(data.get(0)::contains)) {
                     ((NavigationHost) getActivity()).navigateTo(new OxygenTankFragment(), true);
-                } else if (data.get(0).equals("blood pressure")) {
+                } else if (Arrays.stream(bloodPressureWords).allMatch(data.get(0)::contains)) {
                     t1.speak(Integer.toString(bloodPressure), TextToSpeech.QUEUE_FLUSH, null, "Test");
                 } else if (data.get(0).equals("oxygen tank")) {
                     t1.speak(Integer.toString(oxygenTank), TextToSpeech.QUEUE_FLUSH, null, "Test");
-                } else if (data.get(0).equals("turn on power assist")) {
+                } else if (Arrays.stream(powerAssWords).allMatch(data.get(0)::contains)) {
                     StretcherControlFragment.powerAssOn = true;
                     t1.speak("power assist turned on", TextToSpeech.QUEUE_FLUSH, null, "Test");
                     ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true);
-                } else if (data.get(0).equals("mode a")) {
+                } else if (Arrays.stream(chairToCotWords).allMatch(data.get(0)::contains)) {
                     StretcherControlFragment.cotSelected = true;
                     t1.speak("changing to bed", TextToSpeech.QUEUE_FLUSH, null, "Test");
                     ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true);
-                } else if (data.get(0).equals("mode b")) {
+                } else if (Arrays.stream(cotToChairWords).allMatch(data.get(0)::contains)) {
                     StretcherControlFragment.cotSelected = false;
                     t1.speak("changing to chair", TextToSpeech.QUEUE_FLUSH, null, "Test");
                     ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true);
@@ -189,6 +194,7 @@ public class DashboardFragment extends Fragment {
 
             }
         });
+
 
         micButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -229,27 +235,4 @@ public class DashboardFragment extends Fragment {
         super.onDestroy();
         speechRecognizer.destroy();
     }
-
-    private void checkPermission() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)
-        {
-
-        } else {
-            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
-        }
-    }
-
-    private ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    // Permission is granted. Continue the action or workflow in your
-                    // app.
-                } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // features requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
-                }
-            });
 }

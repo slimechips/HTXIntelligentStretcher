@@ -1,17 +1,21 @@
 package com.htx.intelligentstretcher.control;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import com.htx.intelligentstretcher.R;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import com.google.gson.Gson;
+import com.htx.intelligentstretcher.R;
+import com.htx.intelligentstretcher.utils.CotToChairJSON;
+import com.htx.intelligentstretcher.utils.HeightControlJSON;
+import com.htx.intelligentstretcher.utils.PowerAssControlJSON;
 
 public class StretcherControlFragment extends Fragment {
 
@@ -23,6 +27,11 @@ public class StretcherControlFragment extends Fragment {
 
     static public boolean cotSelected = false;
     static public boolean powerAssOn = false;
+    private HeightControlJSON heightCommands = new HeightControlJSON();
+    private PowerAssControlJSON powerAssCommands = new PowerAssControlJSON();
+    private CotToChairJSON cotToChairCommands = new CotToChairJSON();
+    private Gson gson = new Gson();
+    private String json;
 
     @Nullable
     @Override
@@ -41,13 +50,56 @@ public class StretcherControlFragment extends Fragment {
                 powerAssButton.setImageResource(R.drawable.power_button);
                 powerAssButton.setAlpha(0.2f);
                 powerAssOn = false;
+                powerAssCommands.setPowerAssCommand("off");
             } else {
                 powerAssButton.setImageResource(R.drawable.power_button_red);
                 powerAssButton.setAlpha(1.0f);
                 powerAssOn = true;
+                powerAssCommands.setPowerAssCommand("on");
             }
+            json = gson.toJson(powerAssCommands);
+            Log.i("powerAss", json);
         });
         cotButton.callOnClick();
+        upButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch(motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        heightCommands.setHeightCommand("up");
+                        json = gson.toJson(heightCommands);
+                        Log.i("height", json);
+                        return false;
+
+                    case MotionEvent.ACTION_UP:
+                        heightCommands.setHeightCommand("stop");
+                        json = gson.toJson(heightCommands);
+                        Log.i("height", json);
+                        return false;
+                }
+                return false;
+            }
+        });
+
+        downButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch(motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        heightCommands.setHeightCommand("down");
+                        json = gson.toJson(heightCommands);
+                        Log.i("height", json);
+                        return false;
+
+                    case MotionEvent.ACTION_UP:
+                        heightCommands.setHeightCommand("stop");
+                        json = gson.toJson(heightCommands);
+                        Log.i("height", json);
+                        return false;
+                }
+                return false;
+            }
+        });
         return v;
     }
 
@@ -63,6 +115,9 @@ public class StretcherControlFragment extends Fragment {
             cotButton.setAlpha(1.0f);
             chairButton.setAlpha(0.2f);
         }
+        cotToChairCommands.setCotToChairCommand("cot");
+        json = gson.toJson(cotToChairCommands);
+        Log.i("Cot to Chair", json);
         cotSelected = true;
     }
 
@@ -71,6 +126,9 @@ public class StretcherControlFragment extends Fragment {
             cotButton.setAlpha(0.2f);
             chairButton.setAlpha(1.0f);
         }
+        cotToChairCommands.setCotToChairCommand("chair");
+        json = gson.toJson(cotToChairCommands);
+        Log.i("Cot to Chair", json);
         cotSelected = false;
     }
 
