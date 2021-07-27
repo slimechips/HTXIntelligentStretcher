@@ -18,6 +18,9 @@ import com.htx.intelligentstretcher.R;
 import com.htx.intelligentstretcher.utils.CotToChairJSON;
 import com.htx.intelligentstretcher.utils.HeightControlJSON;
 import com.htx.intelligentstretcher.utils.PowerAssControlJSON;
+import static com.htx.intelligentstretcher.MainActivity.client;
+
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 //import static com.htx.intelligentstretcher.MainActivity.client;
 
@@ -74,6 +77,7 @@ public class StretcherControlFragment extends Fragment {
             }
             json = gson.toJson(powerAssCommands);
             Log.i("powerAss", json);
+            pub(json, "powerAss");
         });
         cotButton.callOnClick();
         upButton.setOnTouchListener(new View.OnTouchListener() {
@@ -84,14 +88,16 @@ public class StretcherControlFragment extends Fragment {
                         heightCommands.setHeightCommand("up");
                         json = gson.toJson(heightCommands);
                         Log.i("height", json);
-                        //pub(json, "Height");
+                        pub(json, "height");
+
                         return false;
 
                     case MotionEvent.ACTION_UP:
                         heightCommands.setHeightCommand("stop");
                         json = gson.toJson(heightCommands);
                         Log.i("height", json);
-                        //pub(json, "Height");
+                        pub(json, "height");
+
                         return false;
                 }
                 return false;
@@ -106,12 +112,14 @@ public class StretcherControlFragment extends Fragment {
                         heightCommands.setHeightCommand("down");
                         json = gson.toJson(heightCommands);
                         Log.i("height", json);
+                        pub(json, "height");
                         return false;
 
                     case MotionEvent.ACTION_UP:
                         heightCommands.setHeightCommand("stop");
                         json = gson.toJson(heightCommands);
                         Log.i("height", json);
+                        pub(json, "height");
                         return false;
                 }
                 return false;
@@ -138,6 +146,7 @@ public class StretcherControlFragment extends Fragment {
         cotToChairCommands.setCotToChairCommand("cot");
         json = gson.toJson(cotToChairCommands);
         Log.i("Cot to Chair", json);
+        pub(json, "cotToChair");
         cotSelected = true;
     }
 
@@ -149,6 +158,7 @@ public class StretcherControlFragment extends Fragment {
         cotToChairCommands.setCotToChairCommand("chair");
         json = gson.toJson(cotToChairCommands);
         Log.i("Cot to Chair", json);
+        pub(json, "cotToChair");
         cotSelected = false;
     }
 
@@ -169,17 +179,18 @@ public class StretcherControlFragment extends Fragment {
         }
     }
 
-//    public void pub(String msg, String topicStr){
-//        String topic = topicStr;
-//        String message = msg;
-//        Log.i("test", "pub: ");
-//        try {
-//            client.publish(topic, message.getBytes(),0,false);
-//
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
+
+        public void pub(String msg, String topicStr){
+        String topic = topicStr;
+        String message = msg;
+        Log.i("test", "pub: ");
+        try {
+            client.publish(topic, message.getBytes(),0,false);
+
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
