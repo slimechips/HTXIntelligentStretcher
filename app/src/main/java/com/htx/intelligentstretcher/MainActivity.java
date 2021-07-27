@@ -15,12 +15,20 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 
 import androidx.fragment.app.FragmentContainerView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
 import com.htx.intelligentstretcher.inventory.db.InventoryDatabase;
+
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.Locale;
 
@@ -29,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
     public static SpeechRecognizer speechRecognizer;
     public final static Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+    String MQTTHOST = "tcp://192.168.215.74:1883";
+    public static MqttAndroidClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +57,33 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        String clientId = MqttClient.generateClientId();
+        client = new MqttAndroidClient(this, MQTTHOST, clientId);
+        MqttConnectOptions options = new MqttConnectOptions();
+
+
+        try {
+            Log.i("mqtt", "attempting connection");
+            IMqttToken token = client.connect(options);
+            token.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // We are connected
+                    Log.i("mqtt","connected");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    // Something went wrong e.g. connection timeout or firewall problems
+                    Log.i("test", "did not connect");
+                }
+            });
+            Log.i("mqtt", "done");
+        } catch (MqttException e) {
+            Log.i("mqtt", "exception");
+            e.printStackTrace();
+        }
     }
 
     /**

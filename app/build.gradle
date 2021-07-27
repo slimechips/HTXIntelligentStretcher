@@ -48,4 +48,12 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "com.journeyapps:zxing-android-embedded:4.2.0"
     implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    compile('org.eclipse.paho:org.eclipse.paho.android.service:1.0.2') {
+        exclude module: 'support-v4'
+    }
 }
