@@ -156,7 +156,15 @@ public class StretcherControlFragment extends Fragment {
         if (powerAssOn) {
             powerAssButton.setImageResource(R.drawable.power_button_red);
             powerAssButton.setAlpha(1.0f);
+            powerAssCommands.setPowerAssCommand("on");
+        }else {
+            powerAssButton.setImageResource(R.drawable.power_button);
+            powerAssButton.setAlpha(0.2f);
+            powerAssCommands.setPowerAssCommand("off");
         }
+        json = gson.toJson(powerAssCommands);
+        Log.i("powerAss", json);
+        pub(json, "powerAss");
     }
 
         public void pub(String msg, String topicStr){
