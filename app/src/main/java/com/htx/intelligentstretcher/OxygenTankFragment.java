@@ -3,12 +3,16 @@ package com.htx.intelligentstretcher;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.slider.Slider;
@@ -35,7 +39,7 @@ public class OxygenTankFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_oxygen_tank, container, false);
         Instant_flow_rate = v.findViewById(R.id.textButton2);
 //        seekBar = (SeekBar) findViewById(R.id.seekBar);
-        slider = (Slider) v.findViewById(R.id.slider);
+//        slider = (Slider) v.findViewById(R.id.slider);
         accumulatedText = v.findViewById(R.id.accumulated_vol_text);
         remainingText = v.findViewById(R.id.remaining_vol_text);
         accumulatedText.setText(Float.toString(accumulatedVol));
@@ -58,14 +62,14 @@ public class OxygenTankFragment extends Fragment {
 //            }
 //        });
 
-        slider.addOnChangeListener(new Slider.OnChangeListener() {
-            @Override
-            public void onValueChange(Slider slider, float value, boolean fromUser) {
-                //Use the value
-                oxygenStr  = OXYGEN_LEVEL.format(value);
-                Instant_flow_rate.setText("" + oxygenStr + "SLPM");
-            }
-        });
+//        slider.addOnChangeListener(new Slider.OnChangeListener() {
+//            @Override
+//            public void onValueChange(Slider slider, float value, boolean fromUser) {
+//                //Use the value
+//                oxygenStr  = OXYGEN_LEVEL.format(value);
+//                Instant_flow_rate.setText("" + oxygenStr + "SLPM");
+//            }
+//        });
 
         return v;
     }
@@ -73,4 +77,5 @@ public class OxygenTankFragment extends Fragment {
     public TextView getAccumulatedText() {
         return accumulatedText;
     }
+
 }

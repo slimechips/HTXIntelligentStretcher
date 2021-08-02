@@ -15,7 +15,11 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import com.htx.intelligentstretcher.dosage.DetailActivity;
 import com.htx.intelligentstretcher.inventory.db.InventoryDatabase;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -98,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.i("msg", new String(message.getPayload()));
                 OxygenTankFragment.accumulatedVol = 12.2f;
+                DetailActivity.weight_value = 12.5f;
+
 
             }
 
@@ -106,6 +112,16 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.drug_menu,menu);
+
+        
+
+        return true;
     }
 
     private void setSubscription(String topicStr){
