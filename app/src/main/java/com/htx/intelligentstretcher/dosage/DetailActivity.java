@@ -19,7 +19,7 @@ public class DetailActivity extends AppCompatActivity {
 
     TextView tv;
     EditText et;
-
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
         tv = findViewById(R.id.tv);
         et = findViewById(R.id.et);
 
-        int position = getIntent().getIntExtra("position", 0);
+        position = getIntent().getIntExtra("position", 0);
         //set item
         img.setBackgroundResource(DrugActivity.drugList.get(position).getDrug_photo());
         if (DrugActivity.drugList.get(position).getEt() == 0) {
@@ -39,6 +39,24 @@ public class DetailActivity extends AppCompatActivity {
         } else
             et.setText(DrugActivity.drugList.get(position).getEt() + "");
 
+        setValue();
+        //click event
+        findViewById(R.id.bt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String sd = et.getText().toString();
+                if (isEmpty(sd)) {
+                    Toast.makeText(DetailActivity.this, " Cannot be empty ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                EventBus.getDefault().post(new EventBus_Tag(1, position, sd));
+                setValue();
+            }
+        });
+
+    }
+
+    private void setValue(){
         switch (position) {
             case 0:
                 if (DrugActivity.drugList.get(position).getEt() > 50) {
@@ -55,20 +73,6 @@ public class DetailActivity extends AppCompatActivity {
                 tv.setText(DrugActivity.drugList.get(position).getDrug_info());
                 break;
         }
-        //click event
-        findViewById(R.id.bt).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String sd = et.getText().toString();
-                if (isEmpty(sd)) {
-                    Toast.makeText(DetailActivity.this, " Cannot be empty ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                EventBus.getDefault().post(new EventBus_Tag(1, position, sd));
-                finish();
-            }
-        });
-
     }
 
     //is string empty?

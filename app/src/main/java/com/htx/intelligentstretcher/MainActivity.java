@@ -5,7 +5,6 @@ import android.content.Intent;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -17,18 +16,17 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 
-import androidx.fragment.app.FragmentContainerView;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
 import com.htx.intelligentstretcher.inventory.db.InventoryDatabase;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.Locale;
 
@@ -37,19 +35,21 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
     public static SpeechRecognizer speechRecognizer;
     public final static Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-    String MQTTHOST = "tcp://192.168.215.74:1883";
+    String MQTTHOST = "tcp://192.168.201.74:1883";
     public static MqttAndroidClient client;
-
+    MqttConnectOptions options;
+    private DashboardFragment dashboardFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         InventoryDatabase.buildDatabase(getApplicationContext());
+        dashboardFragment = new DashboardFragment();
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new DashboardFragment())
+                    .add(R.id.container, dashboardFragment)
                     .commit();
         }
 
@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
         String clientId = MqttClient.generateClientId();
         client = new MqttAndroidClient(this, MQTTHOST, clientId);
-        MqttConnectOptions options = new MqttConnectOptions();
+        options = new MqttConnectOptions();
+
 
 
         try {
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // We are connected
                     Log.i("mqtt","connected");
+                    setSubscription("powerAss");
+
                 }
 
                 @Override
@@ -82,6 +85,34 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
             Log.i("mqtt", "done");
         } catch (MqttException e) {
             Log.i("mqtt", "exception");
+            e.printStackTrace();
+        }
+
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                Log.i("msg", new String(message.getPayload()));
+                OxygenTankFragment.accumulatedVol = 12.2f;
+
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
+    }
+
+    private void setSubscription(String topicStr){
+        try{
+            client.subscribe(topicStr,0);
+            Log.i("sub_test", "subscribing");
+        }catch (MqttException e){
             e.printStackTrace();
         }
     }

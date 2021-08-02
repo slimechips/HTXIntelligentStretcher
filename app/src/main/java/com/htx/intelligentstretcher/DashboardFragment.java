@@ -237,4 +237,6 @@ public class DashboardFragment extends Fragment {
         super.onDestroy();
         speechRecognizer.destroy();
     }
+
+
 }
