@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,17 @@ import com.htx.intelligentstretcher.utils.PowerAssControlJSON;
 import static com.htx.intelligentstretcher.MainActivity.client;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
+
+//import static com.htx.intelligentstretcher.MainActivity.client;
+
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
+import javax.security.auth.login.LoginException;
 
 public class StretcherControlFragment extends Fragment {
 
@@ -35,6 +48,8 @@ public class StretcherControlFragment extends Fragment {
     private CotToChairJSON cotToChairCommands = new CotToChairJSON();
     private Gson gson = new Gson();
     private String json;
+
+
 
     @Nullable
     @Override
@@ -74,6 +89,7 @@ public class StretcherControlFragment extends Fragment {
                         json = gson.toJson(heightCommands);
                         Log.i("height", json);
                         pub(json, "height");
+
                         return false;
 
                     case MotionEvent.ACTION_UP:
@@ -81,6 +97,7 @@ public class StretcherControlFragment extends Fragment {
                         json = gson.toJson(heightCommands);
                         Log.i("height", json);
                         pub(json, "height");
+
                         return false;
                 }
                 return false;
@@ -108,8 +125,11 @@ public class StretcherControlFragment extends Fragment {
                 return false;
             }
         });
+
         return v;
     }
+
+
 
     @Override
     public void onResume() {
@@ -167,6 +187,8 @@ public class StretcherControlFragment extends Fragment {
         pub(json, "powerAss");
     }
 
+
+
         public void pub(String msg, String topicStr){
         String topic = topicStr;
         String message = msg;
@@ -178,4 +200,7 @@ public class StretcherControlFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+
+
 }

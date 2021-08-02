@@ -5,6 +5,15 @@ public class Drug {
     private int drug_photo;
     private String drug_name;
     private String drug_info;
+    private double et;
+
+    public double getEt() {
+        return et;
+    }
+
+    public void setEt(double et) {
+        this.et = et;
+    }
 
     public Drug(int drug_photo, String drug_name, String drug_info) {
         this.drug_photo = drug_photo;

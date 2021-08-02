@@ -1,5 +1,6 @@
 package com.htx.intelligentstretcher;
 
+import android.content.Intent;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,7 +33,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.htx.intelligentstretcher.control.StretcherControlFragment;
-import com.htx.intelligentstretcher.dosage.DrugFragment;
+import com.htx.intelligentstretcher.dosage.DrugActivity;
 import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
 
 import java.text.DecimalFormat;
@@ -106,7 +107,8 @@ public class DashboardFragment extends Fragment {
         });
 
         dosageButton.setOnClickListener(v -> {
-            ((NavigationHost) getActivity()).navigateTo(new DrugFragment(), true); // Navigate to the next Fragment
+            startActivity(new Intent(getActivity(), DrugActivity.class));
+//            ((NavigationHost) getActivity()).navigateTo(new DrugFragment(), true); // Navigate to the next Fragment
         });
 
         controlButton.setOnClickListener(v -> {
@@ -235,4 +237,6 @@ public class DashboardFragment extends Fragment {
         super.onDestroy();
         speechRecognizer.destroy();
     }
+
+
 }
