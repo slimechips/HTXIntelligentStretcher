@@ -7,43 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".DashboardFragment">
 
-    <TextView
-        android:id="@+id/dashboardTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="12dp"
-        android:layout_marginHorizontal="20dp"
-        android:text="DASHBOARD"
-        android:textAllCaps="true"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/button"
-        android:layout_marginRight="15dp"
-        android:padding="10dp"
-        android:hint="Tap to Speak"
-        android:id="@+id/text"
-        />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/dashboardTitle"
-        android:backgroundTint="#F9F8FA"
-        android:layout_margin="14dp"
-        android:src="@drawable/ic_mic_black_off"
-        android:id="@+id/button"/>
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/patientVitals"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@id/dashboardTitle"
-        android:layout_marginBottom="20dp"
+        android:layout_marginVertical="20dp"
         android:layout_marginHorizontal="20dp"
         android:clickable="true"
         android:focusable="true"

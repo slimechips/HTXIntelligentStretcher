@@ -58,27 +58,15 @@ public class DashboardFragment extends Fragment {
     private static String oxygenText;
     private TextView otTextView;
     public static final Integer RecordAudioRequestCode = 1;
-    private EditText speechText;
-    private ImageView micButton;
     Handler handler = new Handler();
     Runnable runnable;
     int delay = 10000;
     Date currTime = new Date();
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     String shortTimeStr;
-    TextToSpeech t1;
-    int bloodPressure = 210;
-    int oxygenTank = 150;
 
 //    SpeechRecognizer speechRecognizer = MainActivity.speechRecognizer;
 //    Intent speechRecognizerIntent = MainActivity.speechRecognizerIntent;
-
-    //Speech to text check words
-    String[] powerAssWords = {"power", "assist", "on"};
-    String[] cotToChairWords = {"change", "chair"};
-    String[] chairToCotWords = {"change", "bed"};
-    String[] bloodPressureWords = {"blood", "pressure"};
-    String[] oxygenTankWords = {"oxygen", "tank"};
 
 
     @Override
@@ -92,7 +80,7 @@ public class DashboardFragment extends Fragment {
         dosageButton = view.findViewById(R.id.dosageCheatsheet);
         controlButton = view.findViewById(R.id.stretcherControl);
         otTextView = view.findViewById(R.id.otData);
-        micButton = view.findViewById(R.id.button);
+
 
         oxygenButton.setOnClickListener(v -> {
             ((NavigationHost) getActivity()).navigateTo(new OxygenTankFragment(), true); // Navigate to the next Fragment
@@ -113,103 +101,6 @@ public class DashboardFragment extends Fragment {
 
         controlButton.setOnClickListener(v -> {
             ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true); // Navigate to the next Fragment
-        });
-
-        t1=new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status != TextToSpeech.ERROR) {
-                    t1.setLanguage(Locale.UK);
-                }
-            }
-        });
-
-        speechText = view.findViewById(R.id.text);
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override
-            public void onReadyForSpeech(Bundle bundle) {
-
-            }
-
-            @Override
-            public void onBeginningOfSpeech() {
-                speechText.setText("");
-                speechText.setHint("Listening...");
-            }
-
-            @Override
-            public void onRmsChanged(float v) {
-
-            }
-
-            @Override
-            public void onBufferReceived(byte[] bytes) {
-
-            }
-
-            @Override
-            public void onEndOfSpeech() {
-
-            }
-
-            @Override
-            public void onError(int i) {
-
-            }
-
-            @Override
-            public void onResults(Bundle bundle) {
-                micButton.setImageResource(R.drawable.ic_mic_black_off);
-                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                speechText.setText(data.get(0));
-                t1.speak(data.get(0), TextToSpeech.QUEUE_FLUSH, null, "Test");
-                if (data.get(0).equals("stretcher")) {
-                    ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true);
-                } else if (Arrays.stream(oxygenTankWords).allMatch(data.get(0)::contains)) {
-                    ((NavigationHost) getActivity()).navigateTo(new OxygenTankFragment(), true);
-                } else if (Arrays.stream(bloodPressureWords).allMatch(data.get(0)::contains)) {
-                    t1.speak(Integer.toString(bloodPressure), TextToSpeech.QUEUE_FLUSH, null, "Test");
-                } else if (data.get(0).equals("oxygen tank")) {
-                    t1.speak(Integer.toString(oxygenTank), TextToSpeech.QUEUE_FLUSH, null, "Test");
-                } else if (Arrays.stream(powerAssWords).allMatch(data.get(0)::contains)) {
-                    StretcherControlFragment.powerAssOn = true;
-                    t1.speak("power assist turned on", TextToSpeech.QUEUE_FLUSH, null, "Test");
-                    ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true);
-                } else if (Arrays.stream(chairToCotWords).allMatch(data.get(0)::contains)) {
-                    StretcherControlFragment.cotSelected = true;
-                    t1.speak("changing to bed", TextToSpeech.QUEUE_FLUSH, null, "Test");
-                    ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true);
-                } else if (Arrays.stream(cotToChairWords).allMatch(data.get(0)::contains)) {
-                    StretcherControlFragment.cotSelected = false;
-                    t1.speak("changing to chair", TextToSpeech.QUEUE_FLUSH, null, "Test");
-                    ((NavigationHost) getActivity()).navigateTo(new StretcherControlFragment(), true);
-                }
-            }
-
-            @Override
-            public void onPartialResults(Bundle bundle) {
-
-            }
-
-            @Override
-            public void onEvent(int i, Bundle bundle) {
-
-            }
-        });
-
-
-        micButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    speechRecognizer.stopListening();
-                }
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    micButton.setImageResource(R.drawable.ic_mic_black_24dp);
-                    speechRecognizer.startListening(speechRecognizerIntent);
-                }
-                return false;
-            }
         });
 
         return view;
