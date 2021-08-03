@@ -20,7 +20,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView tv;
     EditText et;
     int position;
-    public static float weight_value = 60;
+    public static float weight_value = 0;
     public static float updated_weight_value = 0;
 
     @Override
@@ -35,7 +35,7 @@ public class DetailActivity extends AppCompatActivity {
         position = getIntent().getIntExtra("position", 0);
         //set item
         img.setBackgroundResource(DrugActivity.drugList.get(position).getDrug_photo());
-        if (DrugActivity.drugList.get(position).getEt() == 0 && weight_value != updated_weight_value) {
+        if (DrugActivity.drugList.get(position).getEt() == 0 || weight_value != updated_weight_value) {
 //            et.setText("");
             et.setText(Float.toString(weight_value));
             updated_weight_value = weight_value;

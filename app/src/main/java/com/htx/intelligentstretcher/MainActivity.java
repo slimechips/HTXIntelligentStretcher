@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
     public static SpeechRecognizer speechRecognizer;
     public final static Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-    String MQTTHOST = "tcp://192.168.201.74:1883";
+    String MQTTHOST = "tcp://192.168.4.1:1883";
     public static MqttAndroidClient client;
     MqttConnectOptions options;
     private DashboardFragment dashboardFragment;
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     // We are connected
                     Log.i("mqtt","connected");
                     setSubscription("powerAss");
+                    setSubscription("height");
 
                 }
 
@@ -101,8 +102,13 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.i("msg", new String(message.getPayload()));
-                OxygenTankFragment.accumulatedVol = 12.2f;
-                DetailActivity.weight_value = 12.5f;
+                Log.i("topic", topic);
+//                Log.i("check", String.valueOf(topic.equals("powerAss")));
+//                OxygenTankFragment.accumulatedVol = 12.2f;
+//                DetailActivity.weight_value = 12.5f;
+
+                if (topic.equals("powerAss")){ OxygenTankFragment.accumulatedVol = 12.2f; DetailActivity.weight_value = 10.5f;}
+                else if (topic.equals("height")) {DetailActivity.weight_value = 60.5f; }
 
 
             }
@@ -119,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.drug_menu,menu);
 
-        
+
 
         return true;
     }
