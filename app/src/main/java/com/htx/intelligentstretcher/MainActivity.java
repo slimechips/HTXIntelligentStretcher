@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         inflater.inflate(R.menu.drug_menu,menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
