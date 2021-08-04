@@ -104,7 +104,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHoder> imple
 
     class MyViewHoder extends RecyclerView.ViewHolder {
         TextView drug_info;
-        Button drug_name;
+        TextView drug_name;
         ImageView drug_photo;
         RelativeLayout parentLayout;
 

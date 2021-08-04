@@ -30,6 +30,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.htx.intelligentstretcher.control.StretcherControlFragment;
 import com.htx.intelligentstretcher.dosage.DetailActivity;
 import com.htx.intelligentstretcher.inventory.db.InventoryDatabase;
@@ -131,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // We are connected
                     Log.i("mqtt","connected");
-                    setSubscription("powerAss");
-                    setSubscription("height");
+                    setSubscription("sensor/weight");
+                    setSubscription("sensor/oxygen");
 
                 }
                 @Override
@@ -161,8 +163,21 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 //                OxygenTankFragment.accumulatedVol = 12.2f;
 //                DetailActivity.weight_value = 12.5f;
 
-                if (topic.equals("powerAss")){ OxygenTankFragment.accumulatedVol = 12.2f; DetailActivity.weight_value = 10.5f;}
-                else if (topic.equals("height")) {DetailActivity.weight_value = 60.5f; }
+                if (topic.equals("sensor/weight")){
+                    String sensor_weight_value = new String(message.getPayload());
+                    JsonObject weight = new Gson().fromJson(sensor_weight_value, JsonObject.class);
+                    float weight_result = weight.get("weight").getAsFloat();
+                    Log.i("weight_value", String.valueOf(weight_result));
+                    DetailActivity.weight_value = weight_result;
+                }
+                else if (topic.equals("sensor/oxygen")) {
+//                    String sensor_oxygen_value = new String(message.getPayload());
+//                    JsonObject weight = new Gson().fromJson(sensor_oxygen_value, JsonObject.class);
+//                    float result = weight.get("weight").getAsFloat();
+//                    DetailActivity.weight_value = result;
+//                    OxygenTankFragment.accumulatedVol = weight_value;
+                }
+
 
 
             }

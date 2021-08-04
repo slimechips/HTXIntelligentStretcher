@@ -29,7 +29,7 @@ public class OxygenTankFragment extends Fragment {
     private TextView remainingText;
     private TextView Instant_flow_rate;
     private static final DecimalFormat OXYGEN_LEVEL = new java.text.DecimalFormat("0.0");
-    public static float accumulatedVol = 0;
+    public static String accumulatedVol = "0";
     public static String oxygenStr = "0";
 
     @Nullable
@@ -42,7 +42,8 @@ public class OxygenTankFragment extends Fragment {
 //        slider = (Slider) v.findViewById(R.id.slider);
         accumulatedText = v.findViewById(R.id.accumulated_vol_text);
         remainingText = v.findViewById(R.id.remaining_vol_text);
-        accumulatedText.setText(Float.toString(accumulatedVol));
+        //accumulatedText.setText(Float.toString(accumulatedVol));
+        accumulatedText.setText(accumulatedVol);
         remainingText.setText("20 m\u00B3");
 
 //        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

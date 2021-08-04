@@ -77,7 +77,7 @@ public class StretcherControlFragment extends Fragment {
             }
             json = gson.toJson(powerAssCommands);
             Log.i("powerAss", json);
-            pub(json, "powerAss");
+            pub(json, "actuator/assist");
         });
         cotButton.callOnClick();
         upButton.setOnTouchListener(new View.OnTouchListener() {
@@ -87,16 +87,16 @@ public class StretcherControlFragment extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         heightCommands.setHeightCommand("up");
                         json = gson.toJson(heightCommands);
-                        Log.i("height", json);
-                        pub(json, "height");
+                        Log.i("actuator/linear", json);
+                        pub(json, "actuator/linear");
 
                         return false;
 
                     case MotionEvent.ACTION_UP:
                         heightCommands.setHeightCommand("stop");
                         json = gson.toJson(heightCommands);
-                        Log.i("height", json);
-                        pub(json, "height");
+                        Log.i("actuator/linear", json);
+                        pub(json, "actuator/linear");
 
                         return false;
                 }
@@ -111,15 +111,15 @@ public class StretcherControlFragment extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         heightCommands.setHeightCommand("down");
                         json = gson.toJson(heightCommands);
-                        Log.i("height", json);
-                        pub(json, "height");
+                        Log.i("actuator/linear", json);
+                        pub(json, "actuator/linear");
                         return false;
 
                     case MotionEvent.ACTION_UP:
                         heightCommands.setHeightCommand("stop");
                         json = gson.toJson(heightCommands);
-                        Log.i("height", json);
-                        pub(json, "height");
+                        Log.i("actuator/linear", json);
+                        pub(json, "actuator/linear");
                         return false;
                 }
                 return false;
