@@ -80,19 +80,20 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         public void run() {
             long millis = System.currentTimeMillis() - startTime;
             int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-
+//            int minutes = seconds / 60;
+//            seconds = seconds % 60;
+            timerHandler.postDelayed(this, 1000);
             if (seconds == reminder) {
                 if (reminders[remindersIndex] == "pressure") {
                     t1.speak(Integer.toString(bloodPressure), TextToSpeech.QUEUE_FLUSH, null, "Test");
+                    
                 } else if (reminders[remindersIndex] == "injection") {
                     t1.speak("Reminder to jab patient", TextToSpeech.QUEUE_FLUSH, null, "Test");
                 }
+                timerHandler.removeCallbacks(timerRunnable);
             }
             Log.i("timer", Integer.toString(seconds));
 
-            timerHandler.postDelayed(this, 1000);
         }
     };
 
@@ -129,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     setSubscription("powerAss");
 
                 }
-
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     // Something went wrong e.g. connection timeout or firewall problems
@@ -250,6 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                         }
                         reminder = second;
                         startTime = 0;
+                        startTime = System.currentTimeMillis();
                         timerHandler.postDelayed(timerRunnable, 0);
                         remindersFlag = false;
                     }
