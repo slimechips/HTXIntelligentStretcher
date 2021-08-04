@@ -81,7 +81,10 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         public void run() {
             long millis = System.currentTimeMillis() - startTime;
             int seconds = (int) (millis / 1000);
+//            int minutes = seconds / 60;
+//            seconds = seconds % 60;
 
+            timerHandler.postDelayed(this, 1000);
             if (seconds == reminder) {
                 if (reminders[remindersIndex] == "pressure") {
                     t1.speak(Integer.toString(bloodPressure), TextToSpeech.QUEUE_FLUSH, null, "Test");
