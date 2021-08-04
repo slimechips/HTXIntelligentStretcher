@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
             if (seconds == reminder) {
                 if (reminders[remindersIndex] == "pressure") {
                     t1.speak(Integer.toString(bloodPressure), TextToSpeech.QUEUE_FLUSH, null, "Test");
-                    Toast.makeText(MainActivity.this,Integer.toString(bloodPressure),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "The blood pressure of patient is: " + Integer.toString(bloodPressure),Toast.LENGTH_SHORT).show();
                 } else if (reminders[remindersIndex] == "injection") {
                     t1.speak("Reminder to jab patient", TextToSpeech.QUEUE_FLUSH, null, "Test");
                     Toast.makeText(MainActivity.this,"Reminder to jab patient",Toast.LENGTH_SHORT).show();
