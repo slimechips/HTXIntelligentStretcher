@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         public void run() {
             long millis = System.currentTimeMillis() - startTime;
             int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
+//            int minutes = seconds / 60;
+//            seconds = seconds % 60;
 
             if (seconds == reminder) {
                 if (reminders[remindersIndex] == "pressure") {
