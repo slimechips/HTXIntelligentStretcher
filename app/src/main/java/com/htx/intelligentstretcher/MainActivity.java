@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     long reminder = 0;
     boolean remindersFlag = false;
     int remindersIndex =  0;
+    int second = 0;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
         @Override
@@ -238,13 +239,19 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                 } else if (remindersFlag) {
                     String time = data.get(0).replaceAll("\\D+","");
                     if (time.equals("")) {
-                        t1.speak("Sorry I do not understand, please repeat", TextToSpeech.QUEUE_FLUSH, null, "Test");
+                        t1.speak("Please give a time to set reminder", TextToSpeech.QUEUE_FLUSH, null, "Test");
                     } else {
-                        int second = Integer.valueOf(time);
+                        if (data.get(0).contains("minute") || data.get(0).contains("minutes")){
+                            second = Integer.valueOf(time) * 60;
+                            t1.speak("setting reminder to check " + reminders[remindersIndex] + " in " + time + " minutes", TextToSpeech.QUEUE_FLUSH, null, "Test");
+                        } else {
+                            second = Integer.valueOf(time);
+                            t1.speak("setting reminder to check " + reminders[remindersIndex] + " in " + time + " seconds", TextToSpeech.QUEUE_FLUSH, null, "Test");
+                        }
                         reminder = second;
                         startTime = 0;
-                        t1.speak("setting reminder to check " + reminders[remindersIndex] + " in " + time + " seconds", TextToSpeech.QUEUE_FLUSH, null, "Test");
                         timerHandler.postDelayed(timerRunnable, 0);
+                        remindersFlag = false;
                     }
                 } else {
                     t1.speak("Sorry I do not understand, please repeat", TextToSpeech.QUEUE_FLUSH, null, "Test");
