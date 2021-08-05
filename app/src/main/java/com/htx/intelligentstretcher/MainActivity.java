@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -35,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.htx.intelligentstretcher.control.StretcherControlFragment;
 import com.htx.intelligentstretcher.dosage.DetailActivity;
 import com.htx.intelligentstretcher.inventory.db.InventoryDatabase;
+import static com.htx.intelligentstretcher.OxygenTankFragment.Instant_flow_rate;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -50,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+
 //Test
 public class MainActivity extends AppCompatActivity implements NavigationHost {
 
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     TextToSpeech t1;
     int bloodPressure = 210;
     int oxygenTank = 150;
+    TextView slpm;
+
 
     //Speech to text check words
     String[] powerAssWords = {"power", "assist", "on"};
@@ -107,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         InventoryDatabase.buildDatabase(getApplicationContext());
         dashboardFragment = new DashboardFragment();
         if (savedInstanceState == null) {
@@ -133,9 +139,9 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // We are connected
                     Log.i("mqtt","connected");
+
                     setSubscription("sensor/weight");
                     setSubscription("sensor/oxygen");
-
                 }
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
@@ -143,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     Log.i("test", "did not connect");
                 }
             });
-            Log.i("mqtt", "done");
         } catch (MqttException e) {
             Log.i("mqtt", "exception");
             e.printStackTrace();
@@ -170,13 +175,16 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     Log.i("weight_value", String.valueOf(weight_result));
                     DetailActivity.weight_value = weight_result;
                 }
-                else if (topic.equals("sensor/oxygen")) {
-//                    String sensor_oxygen_value = new String(message.getPayload());
-//                    JsonObject weight = new Gson().fromJson(sensor_oxygen_value, JsonObject.class);
-//                    float result = weight.get("weight").getAsFloat();
-//                    DetailActivity.weight_value = result;
-//                    OxygenTankFragment.accumulatedVol = weight_value;
+
+                if (topic.equals("sensor/oxygen")) {
+                    String sensor_oxygen_value = new String(message.getPayload());
+                    JsonObject weight = new Gson().fromJson(sensor_oxygen_value, JsonObject.class);
+                    float oxygen_result = weight.get("slpm").getAsFloat();
+                    Log.i("oxygen_test", String.valueOf(oxygen_result));
+
+                    OxygenTankFragment.flow_rate = oxygen_result;
                 }
+
 
 
 

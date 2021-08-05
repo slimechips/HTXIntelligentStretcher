@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.AutoCompleteTextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -41,6 +42,7 @@ public class DrugActivity extends AppCompatActivity {
         Drug drug4 = new Drug(R.drawable.normalsaline, "Normal Saline 0.9%", " 15mg/min");
         Drug drug5 = new Drug(R.drawable.tramadol, "Tramadol", " 0.15mg/Kg");
         Drug drug6 = new Drug(R.drawable.vs, "Ventolin Salbutamol", " 2.5mg/3mL");
+        drugList.clear();
         drugList.add(drug1);
         drugList.add(drug2);
         drugList.add(drug3);

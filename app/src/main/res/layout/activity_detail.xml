@@ -46,7 +46,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:visibility="visible"
-        android:text="Please enter the patient's weight below:"
         android:textColor="#000"
         android:textSize="20dp" />
 
