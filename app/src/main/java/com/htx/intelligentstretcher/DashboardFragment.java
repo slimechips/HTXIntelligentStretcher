@@ -89,10 +89,6 @@ public class DashboardFragment extends Fragment {
             ((NavigationHost) getActivity()).navigateTo(new OxygenTankFragment(), true); // Navigate to the next Fragment
         });
 
-        pvButton.setOnClickListener(view12 -> {
-            ((NavigationHost) getActivity()).navigateTo(new PatientVitals(), true); // Navigate to the next Fragment
-        });
-
         invButton.setOnClickListener(view1 -> {
             ((NavigationHost) getActivity()).navigateTo(new InventoryMainFragment(), true); // Navigate to the next Fragment
         });
