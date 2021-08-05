@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Dosage">
+        android:theme="@style/AppTheme.Launcher">
         <activity android:name=".dosage.DetailActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -26,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".dosage.DrugActivity"></activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" >

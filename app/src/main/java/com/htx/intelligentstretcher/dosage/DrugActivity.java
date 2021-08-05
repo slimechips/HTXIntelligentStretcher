@@ -28,6 +28,7 @@ public class DrugActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_Dosage);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_drug);
         EventBus.getDefault().unregister(this);
@@ -60,7 +61,7 @@ public class DrugActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drug_menu, menu);
+        inflater.inflate(R.menu.app_toolbar, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();

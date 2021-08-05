@@ -25,6 +25,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_Dosage);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
