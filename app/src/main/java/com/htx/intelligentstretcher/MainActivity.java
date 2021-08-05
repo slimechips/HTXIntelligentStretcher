@@ -169,8 +169,9 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     // We are connected
                     Log.i("mqtt","connected");
 
-                    setSubscription("sensor/weight");
                     setSubscription("sensor/oxygen");
+                    setSubscription("sensor/weight");
+
                 }
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
@@ -205,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     DetailActivity.weight_value = weight_result;
                 }
 
-                if (topic.equals("sensor/oxygen")) {
+                else if (topic.equals("sensor/oxygen")) {
                     String sensor_oxygen_value = new String(message.getPayload());
                     JsonObject weight = new Gson().fromJson(sensor_oxygen_value, JsonObject.class);
                     float oxygen_result = weight.get("slpm").getAsFloat();
