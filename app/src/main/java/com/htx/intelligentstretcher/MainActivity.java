@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     Date oxygen_currTime = new Date();
     SimpleDateFormat oxygen_sdf = new SimpleDateFormat("HH:mm");
     public static String oxygen_shortTimeStr;
+    public static float flow_rate = 0;
 
 
     //Speech to text check words
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     float oxygen_result = weight.get("slpm").getAsFloat();
                     Log.i("oxygen_test", String.valueOf(oxygen_result));
                     oxygen_shortTimeStr = oxygen_sdf.format(oxygen_currTime);
-                    OxygenTankFragment.flow_rate = oxygen_result;
+                    flow_rate = oxygen_result;
                 }
 
 

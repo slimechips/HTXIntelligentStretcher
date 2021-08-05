@@ -36,7 +36,6 @@ public class OxygenTankFragment extends Fragment {
     private static final DecimalFormat OXYGEN_LEVEL = new java.text.DecimalFormat("0.0");
     public static String accumulatedVol = "0";
     public static String oxygenStr = "0";
-    public static float flow_rate = 0;
     long startTime = 0;
 
 //    Handler oxygen_timeHandler = new Handler();
@@ -59,7 +58,7 @@ public class OxygenTankFragment extends Fragment {
             long millis = System.currentTimeMillis();
             int seconds = (int) (millis / 1000);
 
-            Instant_flow_rate.setText(Float.toString(flow_rate));
+            Instant_flow_rate.setText(Float.toString(MainActivity.flow_rate));
             timerHandler.postDelayed(this, 1000);
 
             Log.i("timer", Integer.toString(seconds));

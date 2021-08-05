@@ -124,7 +124,7 @@ public class DashboardFragment extends Fragment {
     public void updateCards() {
 //        shortTimeStr = sdf.format(currTime);
         oxygen_updated_time.setText("Last update time: " + MainActivity.oxygen_shortTimeStr);
-        otTextView.setText(OxygenTankFragment.flow_rate + "SLPM");
+        otTextView.setText(MainActivity.flow_rate + "SLPM");
     }
 
     @Override
