@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
     //Speech to text check words
     String[] powerAssWords = {"power", "assist", "on"};
+    String[] powerAssWordsOff = {"power", "assist", "off"};
     String[] cotToChairWords = {"change", "chair"};
     String[] chairToCotWords = {"change", "bed"};
     String[] bloodPressureWords = {"blood", "pressure"};
@@ -251,6 +252,10 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                 } else if (Arrays.stream(powerAssWords).allMatch(data.get(0)::contains)) {
                     StretcherControlFragment.powerAssOn = true;
                     t1.speak("power assist turned on", TextToSpeech.QUEUE_FLUSH, null, "Test");
+                    ((NavigationHost) MainActivity.this).navigateTo(new StretcherControlFragment(), true);
+                } else if (Arrays.stream(powerAssWordsOff).allMatch(data.get(0)::contains)) {
+                    StretcherControlFragment.powerAssOn = false;
+                    t1.speak("power assist turned off", TextToSpeech.QUEUE_FLUSH, null, "Test");
                     ((NavigationHost) MainActivity.this).navigateTo(new StretcherControlFragment(), true);
                 } else if (Arrays.stream(chairToCotWords).allMatch(data.get(0)::contains)) {
                     StretcherControlFragment.cotSelected = true;
