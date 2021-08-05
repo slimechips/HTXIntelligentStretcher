@@ -112,6 +112,7 @@ public class DashboardFragment extends Fragment {
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, delay);
+                Log.i("check_time", "time_updated");
                 updateCards();
             }
         }, delay);
