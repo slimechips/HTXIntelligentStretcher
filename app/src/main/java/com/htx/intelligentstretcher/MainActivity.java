@@ -1,20 +1,24 @@
 package com.htx.intelligentstretcher;
 
 import android.Manifest;
-import android.content.ClipData;
 import android.content.Intent;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuView;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
+import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.BaseColumns;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -23,18 +27,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
+
 import android.widget.TextView;
-import android.widget.Toast;
+
+
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.htx.intelligentstretcher.control.StretcherControlFragment;
 import com.htx.intelligentstretcher.dosage.DetailActivity;
+import com.htx.intelligentstretcher.dosage.DrugActivity;
+import com.htx.intelligentstretcher.inventory.InventoryMainFragment;
 import com.htx.intelligentstretcher.inventory.db.InventoryDatabase;
 import static com.htx.intelligentstretcher.OxygenTankFragment.Instant_flow_rate;
 
@@ -80,6 +83,12 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     String temp = "38.5 degrees celsius";
     String bloodPressure = "118/78 sys/dia";
 
+    //Searcher
+    private static final String[] SUGGESTIONS = {
+            "Stretcher Control", "Oxygen Tank", "Inventory Management", "Dosage Cheatsheet"
+    };
+    private SimpleCursorAdapter mAdapter;
+
     //Reminders variables
     long startTime = 0;
     long reminder = 0;
@@ -115,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_Dosage);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -135,6 +145,15 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         String clientId = MqttClient.generateClientId();
         client = new MqttAndroidClient(this, MQTTHOST, clientId);
         options = new MqttConnectOptions();
+
+        final String[] from = new String[] {"functions"};
+        final int[] to = new int[] {android.R.id.text1};
+        mAdapter = new SimpleCursorAdapter(MainActivity.this,
+                android.R.layout.simple_list_item_1,
+                null,
+                from,
+                to,
+                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
         try {
             Log.i("mqtt", "attempting connection");
@@ -320,14 +339,78 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
         menu.getItem(1).setIcon(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_mic_black_off));
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setSuggestionsAdapter(mAdapter);
+
+        // Getting selected (clicked) item suggestion
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionClick(int position) {
+                Cursor cursor = (Cursor) mAdapter.getItem(position);
+                String txt = cursor.getString(cursor.getColumnIndex("functions"));
+                searchView.setQuery(txt, true);
+                if (txt.equals("Stretcher Control")) {
+                    ((NavigationHost) MainActivity.this).navigateTo(new StretcherControlFragment(), true);
+                } else if (txt.equals("Oxygen Tank")) {
+                    ((NavigationHost) MainActivity.this).navigateTo(new OxygenTankFragment(), true);
+                } else if (txt.equals("Inventory Management")) {
+                    ((NavigationHost) MainActivity.this).navigateTo(new InventoryMainFragment(), true);
+                } else if (txt.equals("Dosage Cheatsheet")) {
+                    startActivity(new Intent(MainActivity.this, DrugActivity.class));
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onSuggestionSelect(int position) {
+                // Your code here
+                return true;
+            }
+        });
         return true;
+    }
+
+    private void populateAdapter(String query) {
+        final MatrixCursor c = new MatrixCursor(new String[]{ BaseColumns._ID, "functions" });
+        for (int i=0; i<SUGGESTIONS.length; i++) {
+            if (SUGGESTIONS[i].toLowerCase().startsWith(query.toLowerCase()))
+                c.addRow(new Object[] {i, SUGGESTIONS[i]});
+        }
+        mAdapter.changeCursor(c);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.drug_menu,menu);
+        inflater.inflate(R.menu.app_toolbar,menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.i("search", query);
+                if (query.equals("stretcher control")) {
+                    ((NavigationHost) MainActivity.this).navigateTo(new StretcherControlFragment(), true);
+                } else if (query.equals("oxygen tank")) {
+                    ((NavigationHost) MainActivity.this).navigateTo(new OxygenTankFragment(), true);
+                } else if (query.equals("inventory management")) {
+                    ((NavigationHost) MainActivity.this).navigateTo(new InventoryMainFragment(), true);
+                } else if (query.equals("dosage cheatsheet")) {
+                    startActivity(new Intent(MainActivity.this, DrugActivity.class));
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                populateAdapter(newText);
+                return false;
+            }
+        });
         return true;
     }
 
