@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -64,6 +65,7 @@ public class DashboardFragment extends Fragment {
     Date currTime = new Date();
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     String shortTimeStr;
+    TextView oxygen_updated_time;
 
 //    SpeechRecognizer speechRecognizer = MainActivity.speechRecognizer;
 //    Intent speechRecognizerIntent = MainActivity.speechRecognizerIntent;
@@ -81,6 +83,7 @@ public class DashboardFragment extends Fragment {
         controlButton = view.findViewById(R.id.stretcherControl);
         otTextView = view.findViewById(R.id.otData);
 
+        oxygen_updated_time = view.findViewById(R.id.oxygen_update_time);
 
         oxygenButton.setOnClickListener(v -> {
             ((NavigationHost) getActivity()).navigateTo(new OxygenTankFragment(), true); // Navigate to the next Fragment
@@ -119,8 +122,9 @@ public class DashboardFragment extends Fragment {
     }
 
     public void updateCards() {
-        shortTimeStr = sdf.format(currTime);
-        otTextView.setText(shortTimeStr);
+//        shortTimeStr = sdf.format(currTime);
+        oxygen_updated_time.setText("Last update time: " + MainActivity.oxygen_shortTimeStr);
+        otTextView.setText(OxygenTankFragment.flow_rate + "SLPM");
     }
 
     @Override

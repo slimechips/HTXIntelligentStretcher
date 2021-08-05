@@ -51,8 +51,10 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -68,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     TextToSpeech t1;
     int oxygenTank = 150;
     TextView slpm;
+    Date oxygen_currTime = new Date();
+    SimpleDateFormat oxygen_sdf = new SimpleDateFormat("HH:mm");
+    public static String oxygen_shortTimeStr;
 
 
     //Speech to text check words
@@ -205,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     JsonObject weight = new Gson().fromJson(sensor_oxygen_value, JsonObject.class);
                     float oxygen_result = weight.get("slpm").getAsFloat();
                     Log.i("oxygen_test", String.valueOf(oxygen_result));
-
+                    oxygen_shortTimeStr = oxygen_sdf.format(oxygen_currTime);
                     OxygenTankFragment.flow_rate = oxygen_result;
                 }
 
