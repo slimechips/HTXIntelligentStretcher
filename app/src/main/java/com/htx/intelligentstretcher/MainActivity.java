@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     MqttConnectOptions options;
     private DashboardFragment dashboardFragment;
     TextToSpeech t1;
-    int bloodPressure = 210;
     int oxygenTank = 150;
     TextView slpm;
 
@@ -74,7 +73,12 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
     String[] chairToCotWords = {"change", "bed"};
     String[] bloodPressureWords = {"blood", "pressure"};
     String[] oxygenTankWords = {"oxygen", "tank"};
-    String[] reminders = {"pressure", "injection"};
+    String[] patientVitalsWords = {"patient", "vital", "signs"};
+    String[] reminders = {"pressure", "injection", "Airways", "consciousness"};
+    String heartRate = "98 bpm";
+    String spo2 = "100%";
+    String temp = "38.5 degrees celsius";
+    String bloodPressure = "118/78 sys/dia";
 
     //Reminders variables
     long startTime = 0;
@@ -94,12 +98,13 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
             timerHandler.postDelayed(this, 1000);
             if (seconds == reminder) {
                 if (reminders[remindersIndex] == "pressure") {
-                    t1.speak(Integer.toString(bloodPressure), TextToSpeech.QUEUE_FLUSH, null, "Test");
-                    Toast.makeText(MainActivity.this, "The blood pressure of patient is: " + Integer.toString(bloodPressure),Toast.LENGTH_SHORT).show();
-
+                    t1.speak(bloodPressure, TextToSpeech.QUEUE_FLUSH, null, "Test");
                 } else if (reminders[remindersIndex] == "injection") {
                     t1.speak("Reminder to jab patient", TextToSpeech.QUEUE_FLUSH, null, "Test");
-                    Toast.makeText(MainActivity.this,"Reminder to jab patient",Toast.LENGTH_SHORT).show();
+                } else if (reminders[remindersIndex] == "Airways") {
+                    t1.speak("Reminder to check patient's airway", TextToSpeech.QUEUE_FLUSH, null, "Test");
+                } else if (reminders[remindersIndex] == "consciousness") {
+                    t1.speak("Reminder to check patient's consciousness", TextToSpeech.QUEUE_FLUSH, null, "Test");
                 }
                 timerHandler.removeCallbacks(timerRunnable);
             }
@@ -254,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                 } else if (Arrays.stream(oxygenTankWords).allMatch(data.get(0)::contains)) {
                     ((NavigationHost) MainActivity.this).navigateTo(new OxygenTankFragment(), true);
                 } else if (Arrays.stream(bloodPressureWords).allMatch(data.get(0)::contains)) {
-                    t1.speak(Integer.toString(bloodPressure), TextToSpeech.QUEUE_FLUSH, null, "Test");
+                    t1.speak(bloodPressure, TextToSpeech.QUEUE_FLUSH, null, "Test");
                 } else if (data.get(0).equals("oxygen tank")) {
                     t1.speak(Integer.toString(oxygenTank), TextToSpeech.QUEUE_FLUSH, null, "Test");
                 } else if (Arrays.stream(powerAssWords).allMatch(data.get(0)::contains)) {
@@ -269,6 +274,9 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     StretcherControlFragment.cotSelected = false;
                     t1.speak("changing to chair", TextToSpeech.QUEUE_FLUSH, null, "Test");
                     ((NavigationHost) MainActivity.this).navigateTo(new StretcherControlFragment(), true);
+                } else if ((Arrays.stream(patientVitalsWords).allMatch(data.get(0)::contains))) {
+                    t1.speak("Patient vital signs are as follows, " + "heart rate " + heartRate + "spo2" + spo2 + "temperature " + temp
+                            + "blood pressure" + bloodPressure, TextToSpeech.QUEUE_FLUSH, null, "Test");
                 } else if (remindersFlag) {
                     String time = data.get(0).replaceAll("\\D+","");
                     if (time.equals("")) {
