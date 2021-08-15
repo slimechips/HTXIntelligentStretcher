@@ -85,7 +85,7 @@ public class StretcherControlFragment extends Fragment {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch(motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        heightCommands.setHeightCommand("up");
+                        heightCommands.setHeightCommand("down");
                         json = gson.toJson(heightCommands);
                         Log.i("actuator/linear", json);
                         pub(json, "actuator/linear");
@@ -109,7 +109,7 @@ public class StretcherControlFragment extends Fragment {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch(motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        heightCommands.setHeightCommand("down");
+                        heightCommands.setHeightCommand("up");
                         json = gson.toJson(heightCommands);
                         Log.i("actuator/linear", json);
                         pub(json, "actuator/linear");
@@ -184,7 +184,7 @@ public class StretcherControlFragment extends Fragment {
         }
         json = gson.toJson(powerAssCommands);
         Log.i("powerAss", json);
-        pub(json, "powerAss");
+        pub(json, "actuator/assist");
     }
 
 
